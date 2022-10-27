@@ -152,6 +152,8 @@ contract AMM {
 			// amount out Y
 			Pools[PID].amount0 += amount;
 			amountOut = int(amount) * int(Pools[PID].amount1) * 1e18 / int(amount * Pools[PID].amount0);
+			
+			Pools[PID].amount1 -= uint(amountOut);
 
 			console.logInt(amountOut);
 		}
@@ -160,10 +162,13 @@ contract AMM {
 			Pools[PID].amount1 += amount;
 			amountOut = int(amount) * int(Pools[PID].amount0) * 1e18 / int(amount * Pools[PID].amount1);
 
+			Pools[PID].amount0 -= uint(amountOut);
+
 			console.logInt(amountOut);
 
 		}
 		// transfer amount token out
+
 		IERC20(tokenOut).transfer(msg.sender, uint(amountOut));
 
 		return uint(amountOut);

@@ -35,7 +35,7 @@ describe("Chainlink Oracle Tests", () => {
   it("Should deploy token X: ", async () => {
     const TOKENX = await ethers.getContractFactory("ERC20");
 
-    let amount = ethers.utils.parseUnits("1000000");
+    let amount = ethers.utils.parseUnits("10000000000000");
 
     tokenX = await TOKENX.deploy("TokenX", "X", amount);
     await tokenX.deployed();
@@ -46,7 +46,7 @@ describe("Chainlink Oracle Tests", () => {
   it("Should deploy token Y: ", async () => {
     const TOKENY = await ethers.getContractFactory("ERC20");
 
-    let amount = ethers.utils.parseUnits("1000000");
+    let amount = ethers.utils.parseUnits("10000000000000");
 
     tokenY = await TOKENY.deploy("TokenY", "Y", amount);
     await tokenY.deployed();
@@ -70,8 +70,8 @@ describe("Chainlink Oracle Tests", () => {
 
   it("Should deposit", async () => {
 
-    let amount0 = ethers.utils.parseUnits("100");
-    let amount1 = ethers.utils.parseUnits("200");
+    let amount0 = ethers.utils.parseUnits("100000000");
+    let amount1 = ethers.utils.parseUnits("200000000");
 
     await tokenX.connect(accounts[0]).approve(ammSwap.address, amount0);
     await tokenY.connect(accounts[0]).approve(ammSwap.address, amount1);
@@ -84,7 +84,7 @@ describe("Chainlink Oracle Tests", () => {
 
   it("Should send token X to user 1", async () => {
 
-    let amount0 = ethers.utils.parseUnits("50");
+    let amount0 = ethers.utils.parseUnits("1");
 
     await tokenX.connect(accounts[0]).transfer(accounts[1].address, amount0);
 
