@@ -70,8 +70,8 @@ describe("Chainlink Oracle Tests", () => {
 
   it("Should deposit", async () => {
 
-    let amount0 = ethers.utils.parseUnits("100000");
-    let amount1 = ethers.utils.parseUnits("50000");
+    let amount0 = ethers.utils.parseUnits("100");
+    let amount1 = ethers.utils.parseUnits("200");
 
     await tokenX.connect(accounts[0]).approve(ammSwap.address, amount0);
     await tokenY.connect(accounts[0]).approve(ammSwap.address, amount1);
@@ -80,6 +80,17 @@ describe("Chainlink Oracle Tests", () => {
     console.log(PID);
 
     await ammSwap.connect(accounts[0]).Deposit(PID, amount0, amount1);
+  });
+
+  it("Should send token X to user 1", async () => {
+
+    let amount0 = ethers.utils.parseUnits("50");
+
+    await tokenX.connect(accounts[0]).transfer(accounts[1].address, amount0);
+
+    let bal = await tokenX.balanceOf(accounts[1].address);
+
+    console.log("balance of user 1", bal);
   });
 
 
@@ -92,14 +103,25 @@ describe("Chainlink Oracle Tests", () => {
 
   });
 
+  // this is not working... 
   it("Should swap", async () => {
-    let amount = ethers.utils.parseUnits("100");
+    let bal = await tokenX.balanceOf(accounts[1].address);
+
+    await tokenX.connect(accounts[1]).approve(ammSwap.address, bal);
 
     let PID = await ammSwap.numberOfPools() - 1;
 
+    /*     
     let rate = await ammSwap.Swap(PID, tokenX.address, amount);
-
     console.log("exchange rate:", rate);
+    */
+    let tx = await ammSwap.connect(accounts[1]).Swap(PID, tokenX.address, bal);
+
+    console.log(tx);
+
+    let balY = await tokenY.balanceOf(accounts[1].address);
+
+    console.log("balance Y", balY);
 
   });
 

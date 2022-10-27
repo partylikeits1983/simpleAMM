@@ -140,21 +140,28 @@ contract AMM {
 	// amountOut = (-dx*y)/(dx + x)
 
 	// still neet to write tests
+	// this is not working... 
 	function Swap(uint PID, address tokenIn, uint amount) public returns (uint) {
 		require(IERC20(tokenIn).transferFrom(msg.sender, address(this), amount));
 
 		address tokenOut = getOtherTokenAddr(PID, tokenIn);
 		int amountOut;
 
+		console.log("Here");
 		if(Pools[PID].token0 == tokenIn) {
 			// amount out Y
-			amountOut = -1 * int(amount) * int(Pools[PID].amount1) / int(amount * Pools[PID].amount0);
 			Pools[PID].amount0 += amount;
+			amountOut = int(amount) * int(Pools[PID].amount1) * 1e18 / int(amount * Pools[PID].amount0);
+
+			console.logInt(amountOut);
 		}
 		else {
 			// amount out X
-			amountOut = -1 * int(amount) * int(Pools[PID].amount0) / int(amount * Pools[PID].amount1);
 			Pools[PID].amount1 += amount;
+			amountOut = int(amount) * int(Pools[PID].amount0) * 1e18 / int(amount * Pools[PID].amount1);
+
+			console.logInt(amountOut);
+
 		}
 		// transfer amount token out
 		IERC20(tokenOut).transfer(msg.sender, uint(amountOut));
