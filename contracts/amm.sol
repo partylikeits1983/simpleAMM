@@ -41,7 +41,7 @@ contract AMM {
 	// 2 * amount y + amount x = 20 
 	// TVL = 20x
 
-	function TVL(uint PID, address token0, address token1) public view returns (int rate, int tvl) {
+	function TVL(uint PID, address token0) public view returns (int rate, int tvl) {
 		address poolX = Pools[PID].token0;
 
 		if (token0 == poolX) {
@@ -62,7 +62,7 @@ contract AMM {
 		return (rate, tvl);
 	}
 
-	function ExchangeRate(uint PID, address token0, address token1) public view returns (int rate) {
+	function ExchangeRate(uint PID, address token0) public view returns (int rate) {
 		address poolX = Pools[PID].token0;
 
 		if (token0 == poolX) {
@@ -147,20 +147,20 @@ contract AMM {
 		address tokenOut = getOtherTokenAddr(PID, tokenIn);
 		int amountOut;
 
-		console.log("Here");
 		if(Pools[PID].token0 == tokenIn) {
 			// amount out Y
 			Pools[PID].amount0 += amount;
-			amountOut = int(amount) * int(Pools[PID].amount1) * 1e18 / int(amount * Pools[PID].amount0);
-			
+			amountOut = int(amount).mul(int(Pools[PID].amount1)).div(int(amount).mul(int(Pools[PID].amount0)));
+
 			Pools[PID].amount1 -= uint(amountOut);
 
+			console.log("Amount Out");
 			console.logInt(amountOut);
 		}
 		else {
 			// amount out X
 			Pools[PID].amount1 += amount;
-			amountOut = int(amount) * int(Pools[PID].amount0) * 1e18 / int(amount * Pools[PID].amount1);
+			amountOut = int(amount).mul(int(Pools[PID].amount0)).div(int(amount).mul(int(Pools[PID].amount1)));
 
 			Pools[PID].amount0 -= uint(amountOut);
 
@@ -168,8 +168,10 @@ contract AMM {
 
 		}
 		// transfer amount token out
-
 		IERC20(tokenOut).transfer(msg.sender, uint(amountOut));
+
+		console.log("New Exchange Rate:");
+		console.logInt(ExchangeRate(PID,tokenIn));
 
 		return uint(amountOut);
 	}

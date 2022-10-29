@@ -2,13 +2,12 @@ const { expect } = require("chai");
 const { parseUnits } = require("ethers/lib/utils");
 const { ethers, network } = require("hardhat");
 
-describe("Chainlink Oracle Tests", () => {
-
+describe("AMM Tests", () => {
   let accounts;
 
   // main
   let ammSwap;
-
+  // ERC20 tokens
   let tokenX;
   let tokenY;
 
@@ -57,37 +56,33 @@ describe("Chainlink Oracle Tests", () => {
   it("Should create pool: ", async () => {
     let tx = await ammSwap.createPool(tokenX.address, tokenY.address);
     await tx.wait();
-    // console.log(tx);
   });
 
   it("Should get pool values: ", async () => {
     let PID = await ammSwap.numberOfPools();
 
     console.log("number of pools",PID);
-    let tx = await ammSwap.Pools(0);
-    console.log(tx);
+    // await ammSwap.Pools(0);
+    // console.log(tx);
   });
 
   it("Should deposit", async () => {
-
-    let amount0 = ethers.utils.parseUnits("100000000");
-    let amount1 = ethers.utils.parseUnits("200000000");
+    let amount0 = ethers.utils.parseUnits("10000");
+    let amount1 = ethers.utils.parseUnits("10000");
 
     await tokenX.connect(accounts[0]).approve(ammSwap.address, amount0);
     await tokenY.connect(accounts[0]).approve(ammSwap.address, amount1);
 
     let PID = await ammSwap.numberOfPools() - 1;
-    console.log(PID);
+    // console.log(PID);
 
     await ammSwap.connect(accounts[0]).Deposit(PID, amount0, amount1);
   });
 
   it("Should send token X to user 1", async () => {
+    let amount = ethers.utils.parseUnits("1000");
 
-    let amount0 = ethers.utils.parseUnits("1");
-
-    await tokenX.connect(accounts[0]).transfer(accounts[1].address, amount0);
-
+    await tokenX.connect(accounts[0]).transfer(accounts[1].address, amount);
     let bal = await tokenX.balanceOf(accounts[1].address);
 
     console.log("balance of user 1", bal);
@@ -97,13 +92,13 @@ describe("Chainlink Oracle Tests", () => {
   it("Should get exchange rate", async () => {
     let PID = await ammSwap.numberOfPools() - 1;
 
-    let rate = await ammSwap.ExchangeRate(PID, tokenX.address, tokenY.address);
+    let rate = await ammSwap.ExchangeRate(PID, tokenX.address);
 
     console.log("exchange rate:", rate);
 
   });
 
-  // this is not working... 
+  // not working when user swap amount == liquidity 
   it("Should swap", async () => {
     let bal = await tokenX.balanceOf(accounts[1].address);
 
@@ -115,16 +110,15 @@ describe("Chainlink Oracle Tests", () => {
     let rate = await ammSwap.Swap(PID, tokenX.address, amount);
     console.log("exchange rate:", rate);
     */
-    let tx = await ammSwap.connect(accounts[1]).Swap(PID, tokenX.address, bal);
+    await ammSwap.connect(accounts[1]).Swap(PID, tokenX.address, bal);
 
-    console.log(tx);
+    // console.log(tx);
 
     let balY = await tokenY.balanceOf(accounts[1].address);
 
     console.log("balance Y", balY);
 
   });
-
 
 });
 
