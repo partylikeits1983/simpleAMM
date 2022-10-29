@@ -67,8 +67,8 @@ describe("AMM Tests", () => {
   });
 
   it("Should deposit", async () => {
-    let amount0 = ethers.utils.parseUnits("10000");
-    let amount1 = ethers.utils.parseUnits("10000");
+    let amount0 = ethers.utils.parseUnits("100000");
+    let amount1 = ethers.utils.parseUnits("100000");
 
     await tokenX.connect(accounts[0]).approve(ammSwap.address, amount0);
     await tokenY.connect(accounts[0]).approve(ammSwap.address, amount1);
@@ -106,7 +106,7 @@ describe("AMM Tests", () => {
 
     let PID = await ammSwap.numberOfPools() - 1;
 
-    /*     
+    /*
     let rate = await ammSwap.Swap(PID, tokenX.address, amount);
     console.log("exchange rate:", rate);
     */

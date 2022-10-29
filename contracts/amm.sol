@@ -176,5 +176,4 @@ contract AMM {
 		return uint(amountOut);
 	}
 	
-
 }
