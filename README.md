@@ -2,6 +2,17 @@
 
 This project was created in order to better understand how a constant product automated market maker (AMM) smart contract works. This is an over simplified AMM exchange contract was created to better understand how the constant product formula works in practice. 
 
+
+## Compiling and Running Tests
+```sh
+forge build
+```
+
+```sh
+forge test -vv
+```
+
+
 ## Constant Product Function
 
 This swap contract uses the formula:  
@@ -67,12 +78,3 @@ amountOut = (-dx * y) / (dx + x)
 
 
 
-
-## Compiling and Running Tests
-```sh
-forge build
-```
-
-```sh
-forge test -vv
-```
