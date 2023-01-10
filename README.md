@@ -5,7 +5,6 @@ This project was created in order to better understand how a constant product au
 ## Constant Product Function
 
 This swap contract uses the formula:  
- 
 
 ```math
 {x * y = k}
@@ -18,12 +17,19 @@ and k is a constant
 ## Calculating change in x from change in y:
 
 From:  
-$ {x * y = k} $  
+```math
+{x * y = k}
+```
+
 We can deduce:  
-$$  {k = (x+dx) * (y+dy)} $$  
+```math
+{k = (x+dx) * (y+dy)} 
+```  
 
 After removing the constants x, y, and k we arrive at the following:
-$$ {dy = \frac{(-dx * 1)} {(dx + 1)}} $$
+```math
+{dy = \frac{(-dx * 1)} {(dx + 1)}}
+```
 
 
 
