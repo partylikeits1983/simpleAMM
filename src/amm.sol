@@ -63,6 +63,16 @@ contract AMM {
 		Positions[msg.sender].amount1 = amount_token1;
 	}
 
+	// @dev withdraw tokens from pool and destroy liquidity position
+	function withdraw() public {
+		// TODO
+		// @dev withdraw tokens from pool without affecting the exchange rate
+		/*
+		uint token_0_amount = Positions[msg.sender].amount0;
+		uint token_1_amount = Positions[msg.sender].amount1;
+		*/
+	}
+
 
 	// @dev hypothetical swap: 
 	// x = 5
@@ -76,7 +86,7 @@ contract AMM {
 	// -10 = 6dy
 	// -10/6 = dy
 	// -1.666
-	// amountOut = (-dx*y)/(dx + x)
+	// amountOut = (-dx * y) / (dx + x)
 
 	// @dev swap tokens in pool
 	function swap(uint PID, address tokenIn, uint amount) public returns (uint) {
@@ -91,8 +101,7 @@ contract AMM {
 			amountOut = int(amount).mul(int(Pools[PID].amount1)).div(int(amount + Pools[PID].amount0));
 
 			Pools[PID].amount1 -= uint(amountOut);
-		}
-		else {
+		} else {
 			// amount out X
 			Pools[PID].amount1 += amount;
 			amountOut = int(amount).mul(int(Pools[PID].amount0)).div(int(amount + Pools[PID].amount1));
@@ -128,8 +137,7 @@ contract AMM {
 
 			rate = amountX.div(amountY);
 			tvl = rate.mul(amountY) + amountX;
-		} 
-		else {
+		} else {
 			int amountX = int(Pools[PID].amount1);
 			int amountY = int(Pools[PID].amount0);
 
@@ -150,8 +158,7 @@ contract AMM {
 			int amountY = int(Pools[PID].amount1);
 
 			rate = uint(amountX.div(amountY));
-		} 
-		else {
+		} else {
 			int amountX = int(Pools[PID].amount1);
 			int amountY = int(Pools[PID].amount0);
 
