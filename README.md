@@ -1,6 +1,6 @@
 ## Constant Product Automated Market Maker Proof of Concept Smart Contract
 
-This project was created in order to better understand how the math behind a constant product automated market maker (AMM) works. This is an over simplified AMM exchange contract was created to better understand how the constant product formula works in practice. 
+This project was created in order to better understand how the math behind a constant product automated market maker (AMM) works. This is a simplified constant function market maker (CFMM) exchange contract and was created to better understand how the constant product formula works in practice. 
 
 NB! This repository was not extensively tested for deploying on the Ethereum mainnet.
 
