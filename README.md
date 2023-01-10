@@ -10,9 +10,6 @@ This swap contract uses the formula:
 {x * y = k}
 ``` 
 
-where x is the amount of token x  
-where y is the amount of token y  
-and k is a constant  
 
 ## Calculating change in x from change in y:
 
@@ -25,16 +22,16 @@ We can deduce:
 ```math
 {k = (x+dx) * (y+dy)} 
 ```  
-
-After removing the constants x, y, and k we arrive at the following:
+  
+After removing the constants x, y, and k we arrive at the following:  
 ```math
 {dy = \frac{(-dx * 1)} {(dx + 1)}}
-```
+```  
 
 
 
 
-## Lets say that we have the following scenario:
+## Lets say that we have the following scenario:  
 
 amount of tokens X in the contract = 5  
 amount of tokens Y in the contract = 10  
@@ -67,3 +64,11 @@ amountOut = (-dx * y) / (dx + x)
 <p align="center">
    <img src="./doc/curve.png">
 </p>
+
+
+
+
+## Compiling and Running Tests
+```sh
+forge test -vv
+```
