@@ -13,10 +13,10 @@ and k is a constant
 
 ## Calculating change in x from change in y:
 
-From:
-$$ {x * y = k} $$ 
-We can deduce:
-$$  {k = (x+dx) * (y+dy)} $$
+From:  
+$$ {x * y = k} $$  
+We can deduce:  
+$$  {k = (x+dx) * (y+dy)} $$  
 
 After removing the constants x, y, and k we arrive at the following:
 $$ {dy = \frac{(-dx * 1)} {(dx + 1)}} $$
