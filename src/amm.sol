@@ -4,6 +4,10 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "src/libraries/math.sol";
 
+/// @title SimpleAMM 
+/// @author Alexander John Lee
+/// @notice CFMM Proof of Concept 
+
 contract AMM {
 	using SD for int256;
 	using SafeERC20 for IERC20; 
