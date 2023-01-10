@@ -25,7 +25,7 @@ We can deduce:
   
 After removing the constants x, y, and k we arrive at the following:  
 ```math
-{dy = \frac{(-dx*y + k - x*y)} {(dx + x)}}
+{dy = \frac{(-dx*y)} {(dx + x)}}
 ```  
 
 
