@@ -86,7 +86,7 @@ contract AMM_test is Test {
         token_0.approve(address(amm), token_0_amount);
         token_1.approve(address(amm), token_1_amount);
         amm.deposit(0, token_0_amount, token_1_amount);
-        assertEq(amm.exchangeRate(PID, address(token_0)), 2e18);
+        assertEq(amm.exchangeRate(PID, address(token_1)), 5e17);
 
         // swapping 100 token_0 for token_1
         uint token_0_amount_to_swap = 100e18;
@@ -97,7 +97,7 @@ contract AMM_test is Test {
         assert(499e17 < token_1_out);
 
         console.logUint(token_1_out);
-        console.logUint(amm.exchangeRate(PID, address(token_0)));
+        console.logUint(amm.exchangeRate(PID, address(token_1)));
     }
     
     // @dev deposit 1:1 and swap 5% of tvl of token_0 for token_1 
