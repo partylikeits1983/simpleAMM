@@ -14,7 +14,7 @@ and k is a constant
 ## Calculating change in x from change in y:
 
 From:  
-$$`{x * y = k} `$$  
+$ {x * y = k} $  
 We can deduce:  
 $$  {k = (x+dx) * (y+dy)} $$  
 
