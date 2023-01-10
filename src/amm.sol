@@ -97,14 +97,16 @@ contract AMM {
 
 		if(Pools[PID].token0 == tokenIn) {
 			// amount out Y
-			Pools[PID].amount0 += amount;
+			// Pools[PID].amount0 += amount;
 			amountOut = int(amount).mul(int(Pools[PID].amount1)).div(int(amount + Pools[PID].amount0));
+			Pools[PID].amount0 += amount;
 
 			Pools[PID].amount1 -= uint(amountOut);
 		} else {
 			// amount out X
-			Pools[PID].amount1 += amount;
+			// Pools[PID].amount1 += amount;
 			amountOut = int(amount).mul(int(Pools[PID].amount0)).div(int(amount + Pools[PID].amount1));
+			Pools[PID].amount1 += amount;
 
 			Pools[PID].amount0 -= uint(amountOut);
 		}
