@@ -4,7 +4,7 @@ This project was created in order to better understand how a constant product au
 
 ## Constant Product Function
 
-This swap contract uses the formula:
+This swap contract uses the formula:  
 $$ {x * y = k} $$ 
 
 where x is the amount of token x  
