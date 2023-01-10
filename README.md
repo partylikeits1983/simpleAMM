@@ -36,7 +36,7 @@ We can deduce:
 {k = (x+dx) * (y+dy)} 
 ```  
   
-We arrive at the following:  
+We then arrive at the following:  
 ```math
 {dy = \frac{(-dx*y)} {(dx + x)}}
 ```  
