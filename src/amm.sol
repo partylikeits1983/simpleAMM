@@ -53,8 +53,8 @@ contract AMM {
 		require(token0 != address(0), "not initialized X");
 		require(token1 != address(0), "not initialized Y");
 
-		IERC20(token0).transferFrom(msg.sender, address(this), amount_token0);
-		IERC20(token1).transferFrom(msg.sender, address(this), amount_token1);
+		IERC20(token0).safeTransferFrom(msg.sender, address(this), amount_token0);
+		IERC20(token1).safeTransferFrom(msg.sender, address(this), amount_token1);
 
 		Pools[PID].amount0 += amount_token0;
 		Pools[PID].amount1 += amount_token1;
@@ -109,7 +109,7 @@ contract AMM {
 			Pools[PID].amount0 -= uint(amountOut);
 		}
 		// transfer amount token out
-		IERC20(tokenOut).transfer(msg.sender, uint(amountOut));
+		IERC20(tokenOut).safeTransfer(msg.sender, uint(amountOut));
 
 		return uint(amountOut);
 	}

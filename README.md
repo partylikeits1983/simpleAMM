@@ -70,5 +70,9 @@ amountOut = (-dx * y) / (dx + x)
 
 ## Compiling and Running Tests
 ```sh
+forge build
+```
+
+```sh
 forge test -vv
 ```
