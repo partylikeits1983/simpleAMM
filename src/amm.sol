@@ -183,7 +183,7 @@ contract AMM {
 			token1 = poolY;
 		}
 		if (token0 == poolY) {
-			token1 = poolY;
+			token1 = poolX;
 		}
 		return token1;
 	}
